@@ -13,13 +13,6 @@ export default function LoadingScreen({ onComplete }) {
   }, [onComplete]);
 
   useEffect(() => {
-    // Check if loader has already been shown (using localStorage for persistence)
-    if (localStorage.getItem("loaderPlayed") === "true") {
-      setShowLoader(false);
-      callbackRef.current?.();
-      return;
-    }
-
     const DURATION = 2000;
     const HOLD = 400;
     const EXIT = 500;
@@ -50,8 +43,6 @@ export default function LoadingScreen({ onComplete }) {
 
         completed.current = true;
 
-        // Use localStorage for persistence across reloads/refreshes
-        localStorage.setItem("loaderPlayed", "true");
         setShowLoader(false);
 
         exitTimeout = setTimeout(() => {

@@ -13,7 +13,7 @@ export default function Experience() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="experience" ref={containerRef} className="relative w-full py-32 md:py-48 px-6">
+    <section id="experience" ref={containerRef} className="relative w-full py-32 md:py-48 px-6 overflow-x-clip">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-4 mb-24">
           <div className="w-12 h-[1px] bg-white/30" />
