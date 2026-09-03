@@ -47,7 +47,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 flex justify-center py-6 px-6 ${
+        className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 flex justify-center py-6 px-6 ${
           scrolled ? "py-4" : "py-8"
         }`}
       >
