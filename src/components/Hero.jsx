@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useHeroParallax } from "../hooks/useHeroParallax";
+import { useHeroParallax } from "../hooks/useheroparallax";
 
 gsap.registerPlugin(ScrollTrigger);
 
