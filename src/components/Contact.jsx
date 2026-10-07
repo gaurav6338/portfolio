@@ -37,7 +37,7 @@ export default function Contact() {
               className="group flex items-center gap-6 pb-6 border-b border-white/20 hover:border-white transition-colors duration-300"
             >
               <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-white/80 group-hover:text-white transition-colors break-all">
-                gauravrai01882002@gmail.com
+                gauravrai1022@gmail.com
               </span>
               <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
                 <ArrowUpRight strokeWidth={1} />

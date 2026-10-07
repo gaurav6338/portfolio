@@ -19,7 +19,7 @@ export const projects = [
     tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Stripe", "Razorpay"],
     image: shopverseImage,
     github: "https://github.com/gaurav6338/E-commerce",
-    live: "https://e-commerce-3mfcjfnop-gauravrai01882002-5115s-projects.vercel.app/"
+    live: "https://e-commerce-five-mocha-44.vercel.app/"
   },
   {
     id: 2,
