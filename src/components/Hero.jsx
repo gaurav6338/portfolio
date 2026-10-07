@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { useHeroParallax } from "../hooks/Useheroparallax";
+import { useHeroParallax } from "../hooks/useheroparallax";
 
 const VIDEO_SRC = "/hero-video.mp4";
 
