@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHeroParallax } from "../hooks/Useheroparallax";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const VIDEO_SRC = "/hero-video.mp4";
-const SCRUB_LENGTH_VH = 150;
 
 export default function Hero() {
-  const wrapperRef = useRef(null);
   const stickyRef = useRef(null);
   const videoRef = useRef(null);
   const videoWrapRef = useRef(null);
@@ -19,8 +14,6 @@ export default function Hero() {
 
   const [isTouchOrNarrow, setIsTouchOrNarrow] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const [hasEnoughData, setHasEnoughData] = useState(false);
 
   const isMobile = isTouchOrNarrow || reducedMotion;
 
@@ -54,89 +47,9 @@ export default function Hero() {
     };
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
 
-    const onLoadedMetadata = () => setIsReady(true);
-    const onCanPlayThrough = () => setHasEnoughData(true);
 
-    video.addEventListener("loadedmetadata", onLoadedMetadata);
-    video.addEventListener("canplaythrough", onCanPlayThrough);
 
-    if (video.readyState >= 1) setIsReady(true);
-    if (video.readyState >= 4) setHasEnoughData(true);
-
-    return () => {
-      video.removeEventListener("loadedmetadata", onLoadedMetadata);
-      video.removeEventListener("canplaythrough", onCanPlayThrough);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isMobile || !isReady) return;
-
-    const video = videoRef.current;
-    const wrapper = wrapperRef.current;
-    const sticky = stickyRef.current;
-
-    if (!video || !wrapper || !sticky) return;
-
-    // Start auto-playing
-    // video.play().catch(() => {});
-
-    // let scrollIdleTimer = null;
-    // let isScrollScrubbing = false;
-
-    const resumeAutoPlay = () => {
-      isScrollScrubbing = false;
-      video.play().catch(() => { });
-    };
-
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: wrapper,
-      start: "top top",
-      end: `+=${SCRUB_LENGTH_VH}%`,
-      pin: sticky,
-      pinSpacing: true,
-      scrub: 0.6,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        if (!video.duration) return;
-
-        // Pause auto-play while scrolling and scrub manually
-        // if (!isScrollScrubbing) {
-        //   isScrollScrubbing = true;
-        //   video.pause();
-        // }
-
-        video.currentTime = self.progress * video.duration;
-
-        // Resume auto-play after scroll stops (500ms idle)
-        // clearTimeout(scrollIdleTimer);
-        // scrollIdleTimer = setTimeout(resumeAutoPlay, 500);
-
-        gsap.to(rgbRef.current, {
-          rotation: self.progress * 10,
-          scale: 1 + self.progress * 0.08,
-          duration: 0.4,
-          overwrite: true,
-          ease: "power2.out",
-        });
-        gsap.to(rgbCoreRef.current, {
-          scale: 1 + self.progress * 0.18,
-          duration: 0.4,
-          overwrite: true,
-          ease: "power2.out",
-        });
-      },
-    });
-
-    return () => {
-      clearTimeout(scrollIdleTimer);
-      scrollTrigger.kill();
-    };
-  }, [isMobile, isReady]);
 
   useEffect(() => {
     const section = stickyRef.current;
@@ -213,34 +126,12 @@ export default function Hero() {
   }, [isMobile]);
 
   return (
-    <div
-      ref={wrapperRef}
-      className={isMobile ? "" : "relative"}
-      style={
-        isMobile
-          ? {}
-          : {
-            height: `${100 + SCRUB_LENGTH_VH}vh`,
-          }
-      }
-    >
+    <div>
       <section
         ref={stickyRef}
         id="home"
         className="relative w-full h-screen overflow-hidden bg-[#030303]"
       >
-        {!hasEnoughData && (
-          <div className="absolute inset-0 z-[100] flex items-center justify-center bg-[#030303]">
-            <div className="flex flex-col items-center gap-4">
-              <span className="w-8 h-8 rounded-full border border-white/10 border-t-white/70 animate-spin" />
-
-              <span className="text-[10px] tracking-[0.3em] uppercase text-white/30">
-                Loading
-              </span>
-            </div>
-          </div>
-        )}
-
         {/* DEEP ATMOSPHERIC BACKGROUND */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div
